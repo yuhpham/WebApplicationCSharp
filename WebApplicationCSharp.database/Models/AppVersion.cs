@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApplicationCSharp.database.Models
 {
-    [Table("version")]
+    [Table("appversion")]
     public class AppVersion : BaseEntity
     {
         public string Version { get; set; } = string.Empty;

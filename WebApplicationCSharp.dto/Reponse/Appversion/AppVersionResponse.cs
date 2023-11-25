@@ -10,5 +10,6 @@ namespace WebApplicationCSharp.dto.Reponse.Appversion
     {
         public Guid Id { get; set; }
         public string Version { get; set; } = string.Empty;
+
     }
 }

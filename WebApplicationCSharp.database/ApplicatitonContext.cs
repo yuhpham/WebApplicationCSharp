@@ -15,7 +15,7 @@ namespace WebApplicationCSharp.database
         {
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer(@"Data Source=sql.bsite.net\\MSSQL2016;User ID=vuavechai_;Password=z12312345;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+                .UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=vuavechai_;User Id=vuavechai_;Password=z12312345;TrustServerCertificate=true;");
         }
     }
 }
