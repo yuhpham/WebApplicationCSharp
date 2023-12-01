@@ -20,7 +20,8 @@ namespace WebApplicationCSharp.Service.Interface
         /// <param-name="request"></param>
         /// <returns></returns>
         Task<AppVersionGetListResponse> GetAppVersionGetList(AppVersionGetListRequest request);
-        Task<ProductGetListResponse> GetProductGetList(ProductGetListRequest request);
+       
+      
 
 
 

@@ -8,6 +8,7 @@ namespace WebApplicationCSharp.dto.Request.Product
 {
     public class ProductGetListRequest : IPagingRequest
     {
+        
         public int PageIndex { get ; set ; }
         public int PageSize { get ; set; }
         public string Name { get; set; } = string.Empty;

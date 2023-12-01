@@ -10,7 +10,6 @@ namespace WebApplicationCSharp.dto.Request.AppVesion
     {
         public int PageIndex { get; set; } 
         public int PageSize { get; set; } 
-
         public string Version { get; set; } = string.Empty;
     }
 }
