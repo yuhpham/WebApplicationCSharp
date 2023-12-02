@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplicationCSharp.database.Models;
 using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Request.Product;
 using WebApplicationCSharp.Service.ProductService;
@@ -36,18 +37,17 @@ namespace WebApplicationCSharp.Controllers
 
             }
         }
-        [Route("get-product")]
+        [Route("post-product")]
 
         [HttpPost()]
 
-        public async Task<IActionResult> PostProducts([FromQuery] ProductGetListRequest request)
+        public async Task<IActionResult> PostProducts(Product product)
         {
-
             try
             {
-                ProductGetListResponse reponse = await _ProductService.PostProductPostList(request);
+                 await _ProductService.PostProductPostList(product);
 
-                return new JsonResult(reponse);
+                return new JsonResult(product);
 
             }
             catch (Exception ex)

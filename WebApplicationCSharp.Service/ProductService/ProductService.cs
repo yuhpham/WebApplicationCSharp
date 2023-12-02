@@ -19,17 +19,27 @@ namespace WebApplicationCSharp.Service.ProductService
             ProductGetListResponse productGetListResponse = new()
             {
                 PageIndex = request.PageIndex,
-                PageSize = request.PageSize
+                PageSize = request.PageSize,
+
             };
 
             using (ApplicatitonContext context = new ApplicatitonContext())
+
             {
-                IQueryable<Product> query = context.Products.Where(a => a.Name.Contains(request.Name));
+                var query2 = context.Products;
+                IQueryable<Product> query = context.Products
+                    .Where(a => a.Name.Contains(request.Name))
+                   .Skip(request.PageSize * (request.PageIndex - 1))
+                    .Take(request.PageSize);
+
+                productGetListResponse.Total = query2.Count();
+
                 productGetListResponse.DataProduct = await query.Select(a => new ProductResponse
                 {
                     Id = a.Id,
                     Name = a.Name,
                 }).ToListAsync();
+
                 return productGetListResponse;
 
             }
@@ -43,7 +53,7 @@ namespace WebApplicationCSharp.Service.ProductService
                 PageSize = request.PageSize
             };
 
-            Product product= new()
+            Product product = new()
             {
                 Name = request.Name,
                 Price = request.Price,
@@ -52,11 +62,18 @@ namespace WebApplicationCSharp.Service.ProductService
                 Quantity = request.Quantity
             };
             using ApplicatitonContext context = new ApplicatitonContext();
+
             await context.Products.AddAsync(product);
             await context.SaveChangesAsync();
 
-            return productGetListResponse; 
+            return productGetListResponse;
         }
+
+        public Task PostProductPostList(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<ProductGetListResponse> PutProductPutList(ProductGetListRequest request)
         {
             throw new NotImplementedException();
