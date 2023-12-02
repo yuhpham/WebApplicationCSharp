@@ -16,7 +16,7 @@ namespace WebApplicationCSharp.Controllers
             _ProductService = new ProductService();
         }
 
-      
+
         [Route("get-product")]
 
         [HttpGet()]
@@ -45,7 +45,7 @@ namespace WebApplicationCSharp.Controllers
         {
             try
             {
-                 await _ProductService.PostProductPostList(product);
+                await _ProductService.PostProductPostList(product);
 
                 return new JsonResult(product);
 

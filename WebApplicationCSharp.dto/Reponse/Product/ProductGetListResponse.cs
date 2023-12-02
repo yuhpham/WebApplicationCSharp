@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebApplicationCSharp.dto.Reponse.Appversion;
-
-namespace WebApplicationCSharp.dto.Reponse.Product
+﻿namespace WebApplicationCSharp.dto.Reponse.Product
 {
     public class ProductGetListResponse
     {
@@ -20,10 +13,15 @@ namespace WebApplicationCSharp.dto.Reponse.Product
         public int PageIndex { get; set; }
 
         /// <summary>
+        /// Total
+        /// </summary>
+        public long Total { get; set; } // bonus
+
+        /// <summary>
         /// Data return
         /// </summary>
-        public List<ProductResponse> DataProduct { get; set; } = new List<ProductResponse>();
+        public List<ProductResponse> DataProduct { get; set; } = [];
 
-        public long Total { get; set; } // bonus
+
     }
 }

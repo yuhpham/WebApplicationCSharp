@@ -3,7 +3,6 @@ using WebApplicationCSharp.database;
 using WebApplicationCSharp.database.Models;
 using WebApplicationCSharp.dto.Reponse.Appversion;
 using WebApplicationCSharp.dto.Request.AppVesion;
-using WebApplicationCSharp.Service.Interface;
 
 namespace WebApplicationCSharp.Service.ApplicationService
 {
@@ -11,12 +10,12 @@ namespace WebApplicationCSharp.Service.ApplicationService
     {
         public async Task<AppVersionGetListResponse> GetAppVersionGetList(AppVersionGetListRequest request)
         {
-            AppVersionGetListResponse appVersionGetListResponse = new AppVersionGetListResponse()
+            AppVersionGetListResponse appVersionGetListResponse = new()
             {
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize
             };
-            using (ApplicatitonContext context = new ApplicatitonContext())
+            using (ApplicatitonContext context = new())
             {
                 IQueryable<AppVersion> query = context.AppVersions.Where(a => a.Version.Contains(request.Version));
                 appVersionGetListResponse.Data = await query.Select(a => new AppVersionResponse

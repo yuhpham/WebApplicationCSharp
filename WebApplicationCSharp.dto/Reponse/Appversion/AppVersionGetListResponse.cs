@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebApplicationCSharp.dto.Reponse.Appversion
+﻿namespace WebApplicationCSharp.dto.Reponse.Appversion
 {
     public class AppVersionGetListResponse
     {
@@ -21,7 +15,7 @@ namespace WebApplicationCSharp.dto.Reponse.Appversion
         /// <summary>
         /// Data return
         /// </summary>
-        public List<AppVersionResponse> Data { get; set; } = new List<AppVersionResponse>();
+        public List<AppVersionResponse> Data { get; set; } = [];
 
         public long Total { get; set; } // bonus
     }

@@ -23,58 +23,42 @@ namespace WebApplicationCSharp.Service.ProductService
 
             };
 
-            using (ApplicatitonContext context = new ApplicatitonContext())
+            using ApplicatitonContext context = new();
 
-            {
-                var query2 = context.Products;
-                IQueryable<Product> query = context.Products
-                    .Where(a => a.Name.Contains(request.Name))
-                   .Skip(request.PageSize * (request.PageIndex - 1))
-                    .Take(request.PageSize);
+            IQueryable<Product> query = context.Products.Where(a => a.Name.Contains(request.Name));
 
-                productGetListResponse.Total = query2.Count();
+            productGetListResponse.DataProduct = await query
+                  .Skip(request.PageSize * (request.PageIndex - 1))
+                  .Take(request.PageSize)
+                  .Select(a => new ProductResponse
+                  {
+                      Id = a.Id,
+                      Name = a.Name,
+                      Category = a.Category,
+                      Images = a.Images,
+                      Price = a.Price,
+                      Unit = a.Unit,
+                      Quantity = a.Quantity
+                  }).ToListAsync();
 
-                productGetListResponse.DataProduct = await query.Select(a => new ProductResponse
-                {
-                    Id = a.Id,
-                    Name = a.Name,
-                }).ToListAsync();
-
-                return productGetListResponse;
-
-            }
-        }
-
-        public async Task<ProductGetListResponse> PostProductPostList(ProductGetListRequest request)
-        {
-            ProductGetListResponse productGetListResponse = new()
-            {
-                PageIndex = request.PageIndex,
-                PageSize = request.PageSize
-            };
-
-            Product product = new()
-            {
-                Name = request.Name,
-                Price = request.Price,
-                Category = request.Category,
-                Images = request.Images,
-                Quantity = request.Quantity
-            };
-            using ApplicatitonContext context = new ApplicatitonContext();
-
-            await context.Products.AddAsync(product);
-            await context.SaveChangesAsync();
+            productGetListResponse.Total = query.Count();
 
             return productGetListResponse;
         }
 
-        public Task PostProductPostList(Product product)
+
+
+        public Task PostProductPostList(Product request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ProductGetListResponse> PutProductPutList(ProductGetListRequest request)
+        public Task PutProductPutList(ProductGetListRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IProductService.DeleteProductDeleteList(ProductGetListRequest request)
         {
             throw new NotImplementedException();
         }
