@@ -8,10 +8,7 @@ namespace WebApplicationCSharp.Service.ProductService
 {
     public class ProductService : IProductService
     {
-        public Task<ProductGetListResponse> DeleteProductDeleteList(ProductGetListRequest request)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public async Task<ProductGetListResponse> GetProductGetList(ProductGetListRequest request)
         {
@@ -45,22 +42,24 @@ namespace WebApplicationCSharp.Service.ProductService
 
             return productGetListResponse;
         }
+        public  Task InsertProduct(ProductGetListRequest request)
+        {
 
+            using ApplicatitonContext context = new();
 
+            return Task.CompletedTask;
+           
+        }
 
-        public Task PostProductPostList(Product request)
+        public Task UpdateProduct(ProductGetListRequest request)
+        {
+            throw new NotImplementedException();
+        }
+        public Task DeleteProduct(ProductGetListRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public Task PutProductPutList(ProductGetListRequest request)
-        {
-            throw new NotImplementedException();
-        }
 
-        Task IProductService.DeleteProductDeleteList(ProductGetListRequest request)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

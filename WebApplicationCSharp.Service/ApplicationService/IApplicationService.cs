@@ -12,7 +12,7 @@ namespace WebApplicationCSharp.Service.ApplicationService
         /// </summary>
         /// <param-name="request"></param>
         /// <returns></returns>
-        Task<AppVersionGetListResponse> GetAppVersionGetList(AppVersionGetListRequest request);
+        Task<AppVersionGetListResponse> GetAppVersionList(AppVersionGetListRequest request);
 
 
 

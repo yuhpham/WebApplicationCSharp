@@ -2,6 +2,7 @@
 using WebApplicationCSharp.database.Models;
 using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Request.Product;
+using WebApplicationCSharp.Service.LogInService;
 using WebApplicationCSharp.Service.ProductService;
 
 namespace WebApplicationCSharp.Controllers
@@ -10,10 +11,12 @@ namespace WebApplicationCSharp.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly ILoggingService _loggingService;
         private readonly ProductService _ProductService;
         public ProductController()
         {
             _ProductService = new ProductService();
+            _loggingService = new LoggingService();
         }
 
 
@@ -31,8 +34,8 @@ namespace WebApplicationCSharp.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-
+               
+                _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
 
             }
@@ -41,26 +44,17 @@ namespace WebApplicationCSharp.Controllers
 
         [HttpPost()]
 
-        public async Task<IActionResult> PostProducts(Product product)
+        public async Task<IActionResult> PostProducts(Product request)
         {
-            try
-            {
-                await _ProductService.PostProductPostList(product);
+            throw new NotImplementedException();
+           
+        }
+        [Route("put-prodct")]
+        [HttpPut()]
+        public async Task<IActionResult> PutProduct(Product request)
+        {
 
-                return new JsonResult(product);
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-
-                return StatusCode(500, ex.Message);
-
-            }
-
-
-
-
+            throw new NotImplementedException();
         }
 
     }

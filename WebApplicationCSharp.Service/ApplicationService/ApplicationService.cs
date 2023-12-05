@@ -8,7 +8,7 @@ namespace WebApplicationCSharp.Service.ApplicationService
 {
     public class ApplicationService : IApplicationService
     {
-        public async Task<AppVersionGetListResponse> GetAppVersionGetList(AppVersionGetListRequest request)
+        public async Task<AppVersionGetListResponse> GetAppVersionList(AppVersionGetListRequest request)
         {
             AppVersionGetListResponse appVersionGetListResponse = new()
             {
