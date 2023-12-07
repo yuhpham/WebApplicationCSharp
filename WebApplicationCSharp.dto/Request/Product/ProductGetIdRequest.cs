@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebApplicationCSharp.dto.Request.Product
 {
-    public class IdProductRequest
+    public class ProductGetIdRequest
     {
-       public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
 
     }
 }

@@ -8,49 +8,37 @@ namespace WebApplicationCSharp.Service.ProductService
 {
     public class ProductService : IProductService
     {
-        private readonly ApplicatitonContext _context = new();
-
-        public ProductService(ApplicatitonContext context)
-        {
-            _context = context;
-        }
-
-        public  async Task<ProductGetIdResponse> GetIdProduct(IdProductRequest request)
+       
+       
+        public async Task <ProductGetIdResponse> GetIdProduct(ProductGetIdRequest request)
         {
             ProductGetIdResponse response = new();
-            try
+            using (ApplicatitonContext context = new())
+
             {
-                
-                if (_context != null && _context.Products != null)
+                Product product = context.Products.Find(request.Id);
+                if (product != null)
                 {
-                    Product product = await _context.Products.FindAsync(request.Id);
-                    if (product != null)
+                    response.ProductGetIdReponse = new()
                     {
-                        response.ProductGetIdReponse = new()
-                        {
-                            Id = product.Id,
-                            Name = product.Name,
-                            Category = product.Category,
-                            Images = product.Images,
-                            Price = product.Price,
-                            Quantity = product.Quantity,
-                            Unit = product.Unit,
-                            CreatAt = product.CreateAt
+                        Id = product.Id,
+                        Name = product.Name,
+                        Category = product.Category,
+                        Images = product.Images,
+                        Price = product.Price,                      
+                        Unit = product.Unit,
+                        Quantity = product.Quantity,
+                        CreatedAt = product.CreatedAt,
+                    };
 
-                        };
-                      
-
-                    }
-                    else
-                    {
-                        Console.WriteLine(" not found");
-                    }
 
                 }
-            }
-            catch (Exception ex) 
-            { 
-                Console.WriteLine(ex.Message);  
+                else
+                {
+                    Console.WriteLine(" not found ");
+                }
+
+
             }
 
             return response;
@@ -67,27 +55,32 @@ namespace WebApplicationCSharp.Service.ProductService
 
             };
 
-           
+            using (ApplicatitonContext context = new())
+            {
 
-            IQueryable<Product> query = _context.Products.Where(a => a.Name.Contains(request.Name));
+                IQueryable<Product> query = context.Products.Where(a => a.Name.Contains(request.Name));
 
-            productGetListResponse.DataProduct = await query
-                  .Skip(request.PageSize * (request.PageIndex - 1))
-                  .Take(request.PageSize)
-                  .Select(a => new ProductResponse
-                  {
-                      Id = a.Id,
-                      Name = a.Name,
-                      Category = a.Category,
-                      Images = a.Images,
-                      Price = a.Price,
-                      Unit = a.Unit,
-                      Quantity = a.Quantity,
-                      CreatAt = a.CreateAt
-                     
-                  }).ToListAsync();
 
-            productGetListResponse.Total = query.Count();
+                productGetListResponse.DataProduct = await query
+                      .Skip(request.PageSize * (request.PageIndex - 1))
+                      .Take(request.PageSize)
+                      .Select(a => new ProductResponse
+                      {
+                          Id = a.Id,
+                          Name = a.Name,
+                          Category = a.Category,
+                          Images = a.Images,
+                          Price = a.Price,
+                          Unit = a.Unit,
+                          Quantity = a.Quantity,
+                          CreatedAt= a.CreatedAt,
+                          
+
+                      }).ToListAsync();
+
+
+                productGetListResponse.Total = query.Count();
+            }
 
             return productGetListResponse;
         }
@@ -101,7 +94,7 @@ namespace WebApplicationCSharp.Service.ProductService
         {
             throw new NotImplementedException();
         }
-        public Task<ProductResponse> DeleteProduct(IdProductRequest request)
+        public Task<ProductResponse> DeleteProduct(ProductGetIdRequest request)
         {
             throw new NotImplementedException();
         }

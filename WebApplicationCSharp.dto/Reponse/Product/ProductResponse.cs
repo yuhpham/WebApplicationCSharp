@@ -9,6 +9,6 @@
         public string Unit { get; set; } = "VND";
         public string Images { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
-        public DateTimeOffset CreatAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
     }
 }
