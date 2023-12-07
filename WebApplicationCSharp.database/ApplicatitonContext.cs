@@ -8,7 +8,6 @@ namespace WebApplicationCSharp.database
     {
         public DbSet<AppVersion> AppVersions { get; set; }
 
-
         public DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

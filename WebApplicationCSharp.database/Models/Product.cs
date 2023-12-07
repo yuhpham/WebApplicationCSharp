@@ -12,11 +12,6 @@ namespace WebApplicationCSharp.database.Models
         public int Quantity { get; set; } = 0;
         public string Unit { get; set; } = "VND";
         public string Images { get; set; } = string.Empty;
-        public string Category { get; set; } = string.Empty;
-
-        public object ForEach(Func<object, EntityEntry<Product>> value)
-        {
-            throw new NotImplementedException();
-        }
+        public string Category { get; set; } = string.Empty;       
     }
 }

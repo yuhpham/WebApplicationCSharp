@@ -4,9 +4,5 @@
     {
         public Guid Id { get; set; }
         public DateTimeOffset CreateAt { get; set; }
-
-
-
-
     }
 }
