@@ -9,6 +9,8 @@ namespace WebApplicationCSharp.database
         public DbSet<AppVersion> AppVersions { get; set; }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

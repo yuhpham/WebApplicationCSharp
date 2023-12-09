@@ -8,9 +8,11 @@ namespace WebApplicationCSharp.Service.ProductService
     {
         Task<ProductGetListResponse> GetProductGetList(ProductGetListRequest request);
         Task<ProductGetIdResponse> GetIdProduct(ProductGetIdRequest request);
-        Task<ProductResponse> InsertProduct(ProductRequest request);
-        Task<ProductResponse> UpdateProduct(ProductRequest request);
-        Task<ProductResponse> DeleteProduct(ProductGetIdRequest request);
+        Task<Boolean> CreateProduct(ProductCreateRequest request);
+        Task<ProductUpdateReponse> UpdateProduct(ProductUpdateRequest request);
+      
+       
+      
 
     }
 }

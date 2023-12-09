@@ -8,60 +8,51 @@ namespace WebApplicationCSharp.Service.ProductService
 {
     public class ProductService : IProductService
     {
-       
-       
-        public async Task <ProductGetIdResponse> GetIdProduct(ProductGetIdRequest request)
+
+
+        public async Task<ProductGetIdResponse> GetIdProduct(ProductGetIdRequest request)
         {
             ProductGetIdResponse response = new();
-            using (ApplicatitonContext context = new())
+            await using (ApplicatitonContext context = new())
 
             {
-                Product product = context.Products.Find(request.Id);
+                Product? product = context.Products.Find(request.Id);
                 if (product != null)
                 {
-                    response.ProductGetIdReponse = new()
+                    response.productGetIdReponse = new()
                     {
                         Id = product.Id,
                         Name = product.Name,
                         Category = product.Category,
                         Images = product.Images,
-                        Price = product.Price,                      
+                        Price = product.Price,
                         Unit = product.Unit,
                         Quantity = product.Quantity,
                         CreatedAt = product.CreatedAt,
                     };
-
-
                 }
                 else
                 {
                     Console.WriteLine(" not found ");
                 }
-
-
             }
-
             return response;
-
         }
 
         public async Task<ProductGetListResponse> GetProductGetList(ProductGetListRequest request)
         {
-
-            ProductGetListResponse productGetListResponse = new()
+            ProductGetListResponse response = new()
             {
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize,
 
             };
-
             using (ApplicatitonContext context = new())
             {
 
                 IQueryable<Product> query = context.Products.Where(a => a.Name.Contains(request.Name));
 
-
-                productGetListResponse.DataProduct = await query
+                response.productGetListResponse = await query
                       .Skip(request.PageSize * (request.PageIndex - 1))
                       .Take(request.PageSize)
                       .Select(a => new ProductResponse
@@ -73,31 +64,39 @@ namespace WebApplicationCSharp.Service.ProductService
                           Price = a.Price,
                           Unit = a.Unit,
                           Quantity = a.Quantity,
-                          CreatedAt= a.CreatedAt,
-                          
-
+                          CreatedAt = a.CreatedAt,
                       }).ToListAsync();
 
-
-                productGetListResponse.Total = query.Count();
+                response.Total = query.Count();
             }
 
-            return productGetListResponse;
+            return response;
         }
+        public async Task<Boolean> CreateProduct(ProductCreateRequest request)
+        {   
+            using (ApplicatitonContext context = new()) 
+            {
+                Product product = new()
+                {
+                    Name = request.Name,
+                    Category = request.Category,
+                    Images = request.Images,
+                    Price = request.Price,
+                    Unit = request.Unit,
+                    Quantity = request.Quantity,
 
-        public Task<ProductResponse> InsertProduct(ProductRequest request)
+                };
+                context.Products.Add(product);
+                int y = await context.SaveChangesAsync();
+
+                return y>0;              
+
+            }          
+           
+        }
+        public Task<ProductUpdateReponse> UpdateProduct(ProductUpdateRequest request)
         {
             throw new NotImplementedException();
         }
-
-        public Task<ProductResponse> UpdateProduct(ProductRequest request)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<ProductResponse> DeleteProduct(ProductGetIdRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

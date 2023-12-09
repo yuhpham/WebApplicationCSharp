@@ -20,7 +20,7 @@
         /// <summary>
         /// Data return
         /// </summary>
-        public List<ProductResponse> DataProduct { get; set; } = [];
+        public List<ProductResponse> productGetListResponse { get; set; } = [];
 
 
     }

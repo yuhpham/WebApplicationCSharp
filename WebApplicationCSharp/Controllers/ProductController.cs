@@ -4,6 +4,7 @@ using WebApplicationCSharp.dto.Request.Product;
 using WebApplicationCSharp.Service.LogInService;
 using WebApplicationCSharp.Service.ProductService;
 using System.Text.Json;
+using Azure;
 
 namespace WebApplicationCSharp.Controllers
 {
@@ -33,8 +34,7 @@ namespace WebApplicationCSharp.Controllers
 
                 ProductGetIdResponse response = await _productService.GetIdProduct(request);
                 _loggingService.LogInfo(JsonSerializer.Serialize(response));
-                return Ok(response);
-
+                return new JsonResult(response);
             }
             catch (Exception ex)
             {
@@ -51,9 +51,9 @@ namespace WebApplicationCSharp.Controllers
         {
             try
             {
-                ProductGetListResponse reponse = await _productService.GetProductGetList(request);
+                ProductGetListResponse response = await _productService.GetProductGetList(request);
 
-                return new JsonResult(reponse);
+                return new JsonResult(response);
 
             }
             catch (Exception ex)
@@ -64,7 +64,23 @@ namespace WebApplicationCSharp.Controllers
 
             }
         }
-       
+        [Route("put-product")]
+
+        [HttpGet()]
+        public async Task <ActionResult> PutProduct(ProductCreateRequest request)
+        {
+            try
+            {
+                await _productService.CreateProduct(request);
+                return Ok();
+               
+
+            }
+            catch (Exception ex) 
+            { _loggingService.LogError(ex);
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 
     }

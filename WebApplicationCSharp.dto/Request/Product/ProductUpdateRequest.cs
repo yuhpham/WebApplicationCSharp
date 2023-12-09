@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplicationCSharp.dto.Request.Product
 {
-    public class ProductRequest
+    public class ProductUpdateRequest
     {
         public string Name { get; set; } = string.Empty;
         public string Price { get; set; } = string.Empty;

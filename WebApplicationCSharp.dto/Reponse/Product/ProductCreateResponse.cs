@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WebApplicationCSharp.dto.Reponse.Product
 {
-    public class ProductGetIdResponse
+    public class ProductCreateResponse
     {
-        public ProductResponse productGetIdReponse { get; set; }    = new ProductResponse();
+        public ProductResponse productCreateResponse { get; set; } = new ProductResponse();
     }
 }
