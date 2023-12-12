@@ -1,5 +1,4 @@
-﻿using WebApplicationCSharp.database.Models;
-using WebApplicationCSharp.dto.Reponse.Product;
+﻿using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Request.Product;
 
 namespace WebApplicationCSharp.Service.ProductService
@@ -10,9 +9,9 @@ namespace WebApplicationCSharp.Service.ProductService
         Task<ProductResponse> GetProductId(Guid Id);
         Task<Boolean> CreateProduct(ProductCreateRequest request);
         Task<ProductResponse> UpdateProduct(ProductUpdateRequest request);
-      
-       
-      
+
+
+
 
     }
 }

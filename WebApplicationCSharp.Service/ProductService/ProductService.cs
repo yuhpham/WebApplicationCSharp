@@ -8,8 +8,6 @@ namespace WebApplicationCSharp.Service.ProductService
 {
     public class ProductService : IProductService
     {
-
-
         public async Task<ProductResponse> GetProductId(Guid Id)
         {
             ProductResponse response = new();
@@ -93,33 +91,27 @@ namespace WebApplicationCSharp.Service.ProductService
 
             }
 
+
         }
         public async Task<ProductResponse> UpdateProduct(ProductUpdateRequest request)
         {
-
             using (ApplicatitonContext context = new())
-
             {
-                if(context.Products!= null)
+                if (context.Products != null)
                 {
                     Product? exitingproduct = context.Products.Find(request.Id);
-                    if ( exitingproduct != null)
+                    if (exitingproduct != null)
                     {
-                        exitingproduct.Name =(request.Name != "")? exitingproduct.Name : request.Name;
-                        exitingproduct.Category=(request.Category !="")? exitingproduct.Category : request.Category;
-                        exitingproduct.Price=(request.Price !="")? exitingproduct.Price : request.Price;
-                        exitingproduct.Unit =(request.Unit !="")? exitingproduct.Unit : request.Unit;
+                        exitingproduct.Name = (request.Name == "") ? exitingproduct.Name : request.Name;
+                        exitingproduct.Category = (request.Category == "") ? exitingproduct.Category : request.Category;
+                        exitingproduct.Price = (request.Price == "") ? exitingproduct.Price : request.Price;
+                        exitingproduct.Unit = (request.Unit == "") ? exitingproduct.Unit : request.Unit;
                         context.Products.Update(exitingproduct);
-                       int i= await context.SaveChangesAsync();
+                        await context.SaveChangesAsync();
                     }
-                    
-                }            
-                
+                }
             }
-
-
             return await GetProductId(request.Id);
-
         }
     }
 }

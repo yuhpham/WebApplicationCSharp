@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Request.Product;
 using WebApplicationCSharp.Service.LogInService;
 using WebApplicationCSharp.Service.ProductService;
-using System.Text.Json;
-using Azure;
 
 namespace WebApplicationCSharp.Controllers
 {
@@ -67,7 +66,7 @@ namespace WebApplicationCSharp.Controllers
         [Route("post-product")]
 
         [HttpPost()]
-        public async Task<ActionResult> PostProduct(ProductCreateRequest request)
+        public async Task<ActionResult> PostProduct([FromQuery]ProductCreateRequest request)
         {
             try
             {
@@ -77,7 +76,8 @@ namespace WebApplicationCSharp.Controllers
 
             }
             catch (Exception ex)
-            { _loggingService.LogError(ex);
+            {
+                _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
             }
         }
@@ -89,7 +89,7 @@ namespace WebApplicationCSharp.Controllers
         {
             try
             {
-                ProductResponse response  = await _productService.UpdateProduct(request);
+                ProductResponse response = await _productService.UpdateProduct(request);
                 return new JsonResult(response);
 
 

@@ -1,14 +1,8 @@
-﻿using Azure;
-using Azure.Core;
-using Microsoft.EntityFrameworkCore;
-using System.Drawing;
-using System.Net.Http;
-using WebApplicationCSharp.database;
+﻿using WebApplicationCSharp.database;
 using WebApplicationCSharp.database.Models;
 using WebApplicationCSharp.dto.Reponse.Cart;
 using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Request.Cart;
-using WebApplicationCSharp.dto.Request.Product;
 
 namespace WebApplicationCSharp.Service.CartService
 {
@@ -72,7 +66,7 @@ namespace WebApplicationCSharp.Service.CartService
         public async Task<CartResponse> AddToCart(CartRequest request)
         {
             throw new NotImplementedException();
-           
+
         }
         public async Task<bool> InsertCart(CartRequest request)
         {
@@ -112,7 +106,5 @@ namespace WebApplicationCSharp.Service.CartService
             }
             return false;
         }
-
-       
     }
 }

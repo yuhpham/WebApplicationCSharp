@@ -10,5 +10,5 @@
             CreatedAt = DateTimeOffset.UtcNow;
         }
     }
-    
+
 }

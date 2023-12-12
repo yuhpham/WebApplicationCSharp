@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace WebApplicationCSharp.database.Models
+﻿namespace WebApplicationCSharp.dto.Request.User
 {
-    [Table("users")]
-    public class User
+    public class UserRequest :IPagingRequest
     {
+
         public Guid Id { get; set; }
-        [Column("Name")]
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public int PageIndex {  get; set; }
+        public int PageSize { get ; set ; }
 
     }
 }

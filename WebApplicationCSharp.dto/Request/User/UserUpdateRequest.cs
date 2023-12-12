@@ -1,15 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebApplicationCSharp.database.Models
+namespace WebApplicationCSharp.dto.Request.User
 {
-    [Table("users")]
-    public class User
+    public class UserUpdateRequest
     {
         public Guid Id { get; set; }
-        [Column("Name")]
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-
+       
     }
 }

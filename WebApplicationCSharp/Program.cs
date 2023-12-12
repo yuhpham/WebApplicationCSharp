@@ -1,5 +1,4 @@
 using log4net.Config;
-using log4net;
 
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

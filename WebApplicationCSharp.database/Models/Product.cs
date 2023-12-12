@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using WebApplicationCSharp.database.Interface;
 
 namespace WebApplicationCSharp.database.Models
@@ -18,14 +17,15 @@ namespace WebApplicationCSharp.database.Models
         public Product Transform()
         {
             return new Product
-            {   Id = Id,
+            {
+                Id = Id,
                 Name = Name,
                 Images = Images,
                 Price = Price,
                 Unit = Unit,
                 Quantity = Quantity,
                 Category = Category,
-                CreatedAt  = CreatedAt,
+                CreatedAt = CreatedAt,
             };
         }
     }

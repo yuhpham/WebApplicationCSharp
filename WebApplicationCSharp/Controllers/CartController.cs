@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using WebApplicationCSharp.dto.Reponse.Cart;
-using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Request.Cart;
 using WebApplicationCSharp.Service.CartService;
 using WebApplicationCSharp.Service.LogInService;

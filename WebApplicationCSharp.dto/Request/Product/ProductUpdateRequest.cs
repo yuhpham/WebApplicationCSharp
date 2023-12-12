@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebApplicationCSharp.dto.Request.Product
+﻿namespace WebApplicationCSharp.dto.Request.Product
 {
     public class ProductUpdateRequest
     {
-        public Guid Id { get; set; } 
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Price { get; set; } = string.Empty;
         public int Quantity { get; set; } = 0;
