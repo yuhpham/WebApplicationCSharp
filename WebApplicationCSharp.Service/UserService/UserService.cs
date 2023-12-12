@@ -1,17 +1,18 @@
-﻿using Azure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebApplicationCSharp.database;
 using WebApplicationCSharp.database.Models;
-using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Reponse.User;
 using WebApplicationCSharp.dto.Request.User;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WebApplicationCSharp.Service.UserService
 {
     public class UserService : IUserService
     {
-
+        /// <summary>
+        /// Get List User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> ListUser</returns>
         public async Task<UserGetListResponse> GetListUser(UserRequest request)
         {
 
@@ -20,9 +21,8 @@ namespace WebApplicationCSharp.Service.UserService
             {
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize,
-
-
             };
+            ///conect database to table user
             using (ApplicatitonContext context = new ApplicatitonContext())
             {
                 IQueryable<User> query = context.Users.Where(a => a.Id == request.Id);
@@ -36,21 +36,25 @@ namespace WebApplicationCSharp.Service.UserService
                          Email = a.Email,
                          Password = a.Password,
 
-
                      }).ToListAsync();
+                /// coutn total record
                 response.Total = query.Count();
 
-
             }
+            ///return data user
             return response;
         }
-
+        /// <summary>
+        /// Get user folow userid
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>User data follow UserId</returns>
         public async Task<UserResponse> GetUserId(Guid Id)
         {
             UserResponse response = new();
             await using (ApplicatitonContext context = new())
 
-            {
+            {   /// conect user find with UserId
                 User? user = context.Users.Find(Id);
 
                 if (user != null)
@@ -62,7 +66,6 @@ namespace WebApplicationCSharp.Service.UserService
                         Email = user.Email,
                         Password = user.Password,
 
-
                     };
                 }
                 else
@@ -70,8 +73,14 @@ namespace WebApplicationCSharp.Service.UserService
                     Console.WriteLine(" not found ");
                 }
             }
+            /// return data user follow UserId
             return response;
         }
+        /// <summary>
+        /// Create new User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>true or fale</returns>
         public async Task<bool> CreateUser(UserCreateRequest request)
         {
             using (ApplicatitonContext context = new())
@@ -89,7 +98,11 @@ namespace WebApplicationCSharp.Service.UserService
             }
         }
 
-
+        /// <summary>
+        /// Update User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> updated user == GetUserId</returns>
         public async Task<UserResponse> UpdateUser(UserUpdateRequest request)
         {
             using (ApplicatitonContext context = new())
@@ -102,9 +115,7 @@ namespace WebApplicationCSharp.Service.UserService
                         query.Name = (request.Name == "") ? query.Name : request.Name;
                         query.Email = (request.Email == "") ? query.Email : request.Email;
                         query.Password = (request.Password == "") ? query.Password : request.Password;
-
                     }
-
                 }
             }
             return await GetUserId(request.Id);

@@ -15,14 +15,14 @@ namespace WebApplicationCSharp.Controllers
         public UserController()
         {
             _service = new UserService();
-            _loggingService= new LoggingService();
+            _loggingService = new LoggingService();
         }
 
         [Route("get-user-id")]
 
         [HttpGet]
 
-        public async Task<IActionResult> GetUserId([FromQuery]Guid Id)
+        public async Task<IActionResult> GetUserId([FromQuery] Guid Id)
         {
             try
             {
@@ -40,11 +40,11 @@ namespace WebApplicationCSharp.Controllers
 
         [HttpGet]
 
-        public async Task <IActionResult> GetListUser([FromQuery] UserRequest request)
+        public async Task<IActionResult> GetListUser([FromQuery] UserRequest request)
         {
-            try 
+            try
             {
-                UserGetListResponse response= await _service.GetListUser(request);
+                UserGetListResponse response = await _service.GetListUser(request);
                 return new JsonResult(response);
             }
             catch (Exception ex)
@@ -57,14 +57,15 @@ namespace WebApplicationCSharp.Controllers
         [Route("add-user")]
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromQuery]UserCreateRequest request)
+        public async Task<IActionResult> CreateUser([FromQuery] UserCreateRequest request)
         {
-            try {
+            try
+            {
                 bool response = await _service.CreateUser(request);
-                
+
                 return new JsonResult(response);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);

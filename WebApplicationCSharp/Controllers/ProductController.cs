@@ -27,7 +27,6 @@ namespace WebApplicationCSharp.Controllers
 
         public async Task<ActionResult> GetIdProduct([FromQuery] Guid Id)
         {
-
             try
             {
 
@@ -66,7 +65,7 @@ namespace WebApplicationCSharp.Controllers
         [Route("post-product")]
 
         [HttpPost()]
-        public async Task<ActionResult> PostProduct([FromQuery]ProductCreateRequest request)
+        public async Task<ActionResult> PostProduct([FromQuery] ProductCreateRequest request)
         {
             try
             {

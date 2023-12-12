@@ -8,11 +8,16 @@ namespace WebApplicationCSharp.Service.ProductService
 {
     public class ProductService : IProductService
     {
+        /// <summary>
+        /// Get Product follow ProductId
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>Product data follow ProductId</returns>
         public async Task<ProductResponse> GetProductId(Guid Id)
         {
             ProductResponse response = new();
-            await using (ApplicatitonContext context = new())
 
+            await using (ApplicatitonContext context = new())
             {
                 Product? product = context.Products.Find(Id);
                 if (product != null)
@@ -36,7 +41,11 @@ namespace WebApplicationCSharp.Service.ProductService
             }
             return response;
         }
-
+        /// <summary>
+        /// Get List Data Product 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Product Data folow request</returns>
         public async Task<ProductGetListResponse> GetProductGetList(ProductGetListRequest request)
         {
             ProductGetListResponse response = new()
@@ -47,8 +56,11 @@ namespace WebApplicationCSharp.Service.ProductService
             };
             using (ApplicatitonContext context = new())
             {
-
-                IQueryable<Product> query = context.Products.Where(a => a.Name.Contains(request.Name));
+                /// serch follow request name , price , category
+                IQueryable<Product> query = context.Products
+                                             .Where(a => a.Name.Contains(request.Name)
+                                                      && a.Price.Contains(request.Price)
+                                                      && a.Category.Contains(request.Category));
 
                 response.productGetListResponse = await query
                       .Skip(request.PageSize * (request.PageIndex - 1))
@@ -70,6 +82,11 @@ namespace WebApplicationCSharp.Service.ProductService
 
             return response;
         }
+        /// <summary>
+        /// Creat New Product
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>If True => Product Created</returns>
         public async Task<Boolean> CreateProduct(ProductCreateRequest request)
         {
             using (ApplicatitonContext context = new())
@@ -88,11 +105,14 @@ namespace WebApplicationCSharp.Service.ProductService
                 int y = await context.SaveChangesAsync();
 
                 return y > 0;
-
             }
 
-
         }
+        /// <summary>
+        /// Update Product follow request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Updated Data Product => GetProductId</returns>
         public async Task<ProductResponse> UpdateProduct(ProductUpdateRequest request)
         {
             using (ApplicatitonContext context = new())

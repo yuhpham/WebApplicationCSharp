@@ -63,7 +63,7 @@ namespace WebApplicationCSharp.Service.CartService
             }
             return Task.FromResult(listCartResponse);
         }
-        public async Task<CartResponse> AddToCart(CartRequest request)
+        public Task<CartResponse> AddToCart(CartRequest request)
         {
             throw new NotImplementedException();
 

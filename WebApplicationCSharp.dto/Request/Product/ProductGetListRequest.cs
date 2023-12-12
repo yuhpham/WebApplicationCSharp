@@ -6,6 +6,7 @@ namespace WebApplicationCSharp.dto.Request.Product
 
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Price { get; set; } = string.Empty;
         public int Quantity { get; set; } = 0;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebApplicationCSharp.dto.Reponse.User
+﻿namespace WebApplicationCSharp.dto.Reponse.User
 {
     public class UserGetListResponse
     {
@@ -22,7 +16,7 @@ namespace WebApplicationCSharp.dto.Reponse.User
         /// Data return
         /// </summary>
         /// 
-        public List <UserResponse> userGetListResponse { get; set; } = new List<UserResponse>();   
+        public List<UserResponse> userGetListResponse { get; set; } = new List<UserResponse>();
 
         public int Total { get; set; }
     }
