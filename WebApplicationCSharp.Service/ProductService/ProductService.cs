@@ -10,16 +10,16 @@ namespace WebApplicationCSharp.Service.ProductService
     {
 
 
-        public async Task<ProductGetIdResponse> GetProductId(Guid Id)
+        public async Task<ProductResponse> GetProductId(Guid Id)
         {
-            ProductGetIdResponse response = new();
+            ProductResponse response = new();
             await using (ApplicatitonContext context = new())
 
             {
                 Product? product = context.Products.Find(Id);
                 if (product != null)
                 {
-                    response.productGetIdReponse = new()
+                    response = new()
                     {
                         Id = product.Id,
                         Name = product.Name,
@@ -94,7 +94,7 @@ namespace WebApplicationCSharp.Service.ProductService
             }
 
         }
-        public async Task<ProductUpdateReponse> UpdateProduct(ProductUpdateRequest request)
+        public async Task<ProductResponse> UpdateProduct(ProductUpdateRequest request)
         {
 
             using (ApplicatitonContext context = new())
@@ -102,23 +102,23 @@ namespace WebApplicationCSharp.Service.ProductService
             {
                 if(context.Products!= null)
                 {
-                    Product? product = context.Products.Find(request.Id);
-                    if (product != null)
+                    Product? exitingproduct = context.Products.Find(request.Id);
+                    if ( exitingproduct != null)
                     {
-                        if (request.Name != null) { request.Name = product.Name; }
-                        if (request.Category != null) { request.Category = product.Category; }
-                        if (request.Images != null) { request.Images = product.Images; }
-                        if (request.Price != null) { request.Price = product.Price; }
-                        if (request.Unit != null) { request.Unit = product.Unit; }
-                        _ = context.Products.Update(product);
-                        _ = await context.SaveChangesAsync();
-
+                        exitingproduct.Name =(request.Name != "")? exitingproduct.Name : request.Name;
+                        exitingproduct.Category=(request.Category !="")? exitingproduct.Category : request.Category;
+                        exitingproduct.Price=(request.Price !="")? exitingproduct.Price : request.Price;
+                        exitingproduct.Unit =(request.Unit !="")? exitingproduct.Unit : request.Unit;
+                        context.Products.Update(exitingproduct);
+                       int i= await context.SaveChangesAsync();
                     }
-                }
-                return ?
+                    
+                }            
                 
             }
-         
+
+
+            return await GetProductId(request.Id);
 
         }
     }

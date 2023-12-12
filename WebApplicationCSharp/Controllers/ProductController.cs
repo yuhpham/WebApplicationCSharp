@@ -17,7 +17,7 @@ namespace WebApplicationCSharp.Controllers
 
 
         public ProductController()
-        {   
+        {
             _productService = new ProductService();
             _loggingService = new LoggingService();
         }
@@ -32,7 +32,7 @@ namespace WebApplicationCSharp.Controllers
             try
             {
 
-                ProductGetIdResponse response = await _productService.GetProductId(Id);
+                ProductResponse response = await _productService.GetProductId(Id);
                 _loggingService.LogInfo(JsonSerializer.Serialize(response));
                 return new JsonResult(response);
             }
@@ -58,26 +58,45 @@ namespace WebApplicationCSharp.Controllers
             }
             catch (Exception ex)
             {
-               
+
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
 
             }
         }
-        [Route("put-product")]
+        [Route("post-product")]
 
-        [HttpPut()]
-        public async Task <ActionResult> PutProduct(ProductCreateRequest request)
+        [HttpPost()]
+        public async Task<ActionResult> PostProduct(ProductCreateRequest request)
         {
             try
             {
                 await _productService.CreateProduct(request);
                 return Ok();
-               
+
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             { _loggingService.LogError(ex);
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("put-product")]
+
+        [HttpPut()]
+        public async Task<ActionResult> PutProduct([FromQuery] ProductUpdateRequest request)
+        {
+            try
+            {
+                ProductResponse response  = await _productService.UpdateProduct(request);
+                return new JsonResult(response);
+
+
+            }
+            catch (Exception ex)
+            {
+                _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
             }
         }
