@@ -26,13 +26,13 @@ namespace WebApplicationCSharp.Controllers
 
         [HttpGet()]
 
-        public async Task<ActionResult> GetIdProduct([FromQuery] ProductGetIdRequest request)
+        public async Task<ActionResult> GetIdProduct([FromQuery] Guid Id)
         {
 
             try
             {
 
-                ProductGetIdResponse response = await _productService.GetIdProduct(request);
+                ProductGetIdResponse response = await _productService.GetProductId(Id);
                 _loggingService.LogInfo(JsonSerializer.Serialize(response));
                 return new JsonResult(response);
             }
@@ -66,7 +66,7 @@ namespace WebApplicationCSharp.Controllers
         }
         [Route("put-product")]
 
-        [HttpGet()]
+        [HttpPut()]
         public async Task <ActionResult> PutProduct(ProductCreateRequest request)
         {
             try

@@ -7,7 +7,7 @@ namespace WebApplicationCSharp.Service.ProductService
     public interface IProductService
     {
         Task<ProductGetListResponse> GetProductGetList(ProductGetListRequest request);
-        Task<ProductGetIdResponse> GetIdProduct(ProductGetIdRequest request);
+        Task<ProductGetIdResponse> GetProductId(Guid Id);
         Task<Boolean> CreateProduct(ProductCreateRequest request);
         Task<ProductUpdateReponse> UpdateProduct(ProductUpdateRequest request);
       

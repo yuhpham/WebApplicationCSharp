@@ -10,13 +10,13 @@ namespace WebApplicationCSharp.Service.ProductService
     {
 
 
-        public async Task<ProductGetIdResponse> GetIdProduct(ProductGetIdRequest request)
+        public async Task<ProductGetIdResponse> GetProductId(Guid Id)
         {
             ProductGetIdResponse response = new();
             await using (ApplicatitonContext context = new())
 
             {
-                Product? product = context.Products.Find(request.Id);
+                Product? product = context.Products.Find(Id);
                 if (product != null)
                 {
                     response.productGetIdReponse = new()
@@ -73,8 +73,8 @@ namespace WebApplicationCSharp.Service.ProductService
             return response;
         }
         public async Task<Boolean> CreateProduct(ProductCreateRequest request)
-        {   
-            using (ApplicatitonContext context = new()) 
+        {
+            using (ApplicatitonContext context = new())
             {
                 Product product = new()
                 {
@@ -89,14 +89,37 @@ namespace WebApplicationCSharp.Service.ProductService
                 context.Products.Add(product);
                 int y = await context.SaveChangesAsync();
 
-                return y>0;              
+                return y > 0;
 
-            }          
-           
+            }
+
         }
-        public Task<ProductUpdateReponse> UpdateProduct(ProductUpdateRequest request)
+        public async Task<ProductUpdateReponse> UpdateProduct(ProductUpdateRequest request)
         {
-            throw new NotImplementedException();
+
+            using (ApplicatitonContext context = new())
+
+            {
+                if(context.Products!= null)
+                {
+                    Product? product = context.Products.Find(request.Id);
+                    if (product != null)
+                    {
+                        if (request.Name != null) { request.Name = product.Name; }
+                        if (request.Category != null) { request.Category = product.Category; }
+                        if (request.Images != null) { request.Images = product.Images; }
+                        if (request.Price != null) { request.Price = product.Price; }
+                        if (request.Unit != null) { request.Unit = product.Unit; }
+                        _ = context.Products.Update(product);
+                        _ = await context.SaveChangesAsync();
+
+                    }
+                }
+                return ?
+                
+            }
+         
+
         }
     }
 }

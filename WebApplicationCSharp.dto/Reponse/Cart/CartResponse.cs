@@ -9,8 +9,7 @@ namespace WebApplicationCSharp.dto.Reponse.Cart
 {
     public class CartResponse
     {
-        public Guid Guid { get; set; }
-        public Guid UserId { get; set; }    
-        public List<ProductResponse> ListProduct { get; set; } = new List<ProductResponse>();
+        public Guid UserId { get; set; }
+        public string ListProducts { get; set; } = string.Empty;
     }
 }

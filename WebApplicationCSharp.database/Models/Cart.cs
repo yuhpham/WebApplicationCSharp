@@ -4,16 +4,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplicationCSharp.database.Interface;
 
 namespace WebApplicationCSharp.database.Models
 {
     [Table("cart")]
-    public class Cart : BaseEntity
+    public class Cart : BaseEntity ,ITransform<Cart>
     {
-        [Column("userId")]
-        public Guid UserId {  get; set; }   
-        public List <Product> ListProductId { get; set; }=new List<Product>();
-        public bool IsCheckOut { get; set; }
+        [Column("Products")]             
+        public  string ListProducts { get; set; } = string.Empty;
 
+        public Cart Transform()
+        {
+            return new Cart()
+            {
+                Id = Id,
+                ListProducts = ListProducts,                
+            };
+        }
     }
 }
