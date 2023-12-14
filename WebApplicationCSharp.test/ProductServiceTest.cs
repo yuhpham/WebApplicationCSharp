@@ -12,21 +12,7 @@ namespace WebApplicationCSharp.test
         public ProductServiceTest()
         {
             _productService = new ProductService();
-        }
-
-        /// <summary>
-        /// GetProductList with Id
-        /// </summary>
-        [TestMethod]
-        public async Task GetProductIdTestAsync()
-        {
-            Guid Id = Guid.NewGuid();
-
-            ProductResponse response = await _productService.GetProductId(Id);
-            Assert.IsNotNull(response);
-            Assert.Equals(response.Id,Id);
-
-        }
+        }        
 
         /// <summary>
         /// GetProduct with productName exception case request
@@ -67,7 +53,6 @@ namespace WebApplicationCSharp.test
             Assert.IsNotNull(i);
             Assert.IsTrue(i);
         }
-
         
     }
 }

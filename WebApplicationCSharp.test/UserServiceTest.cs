@@ -20,6 +20,7 @@ namespace WebApplicationCSharp.test
             {
                 PageIndex = 1,
                 PageSize = 10,
+                Name = "test",
             };
             // Output
             UserGetListResponse response = await _userService.GetListUser(request);
