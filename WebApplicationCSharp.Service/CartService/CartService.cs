@@ -7,7 +7,7 @@ using WebApplicationCSharp.dto.Request.Cart;
 namespace WebApplicationCSharp.Service.CartService
 {
     public class CartService : ICartService
-    {   
+    {
         /// <summary>
         /// GetCart
         /// </summary>

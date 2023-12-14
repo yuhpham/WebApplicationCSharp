@@ -139,16 +139,16 @@ namespace WebApplicationCSharp.Service.ProductService
             {
                 Product? product = context.Products.Find(Id);
 
-                if (product!=null)
+                if (product != null)
                 {
-                  context.Products.Remove(product);
+                    context.Products.Remove(product);
                     i = await context.SaveChangesAsync();
-                    return i> 0;
+                    return i > 0;
                 }
 
             }
             return i > 0;
-           
+
         }
     }
 }

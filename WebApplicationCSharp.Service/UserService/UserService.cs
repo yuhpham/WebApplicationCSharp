@@ -25,7 +25,7 @@ namespace WebApplicationCSharp.Service.UserService
             ///conect database to table user
             using (ApplicatitonContext context = new ApplicatitonContext())
             {
-                IQueryable<User> query = context.Users.Where(a => a.Name.Contains(request.Name)&& a.Email.Contains(request.Email));
+                IQueryable<User> query = context.Users.Where(a => a.Name.Contains(request.Name) && a.Email.Contains(request.Email));
                 response.userGetListResponse = await query
                      .Skip(request.PageSize * (request.PageIndex - 1))
                      .Take(request.PageSize)

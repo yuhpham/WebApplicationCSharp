@@ -1,8 +1,5 @@
-﻿using WebApplicationCSharp.dto.Reponse.Appversion;
-using WebApplicationCSharp.dto.Reponse.Product;
-using WebApplicationCSharp.dto.Request.AppVesion;
+﻿using WebApplicationCSharp.dto.Reponse.Product;
 using WebApplicationCSharp.dto.Request.Product;
-using WebApplicationCSharp.Service.ApplicationService;
 using WebApplicationCSharp.Service.ProductService;
 
 namespace WebApplicationCSharp.test
@@ -48,8 +45,6 @@ namespace WebApplicationCSharp.test
                 PageIndex = 1,
                 PageSize = 10,
                 Name = "Product 45039",
-
-
             };
             // Output
             ProductGetListResponse response = await _productService.GetProductGetList(request);
