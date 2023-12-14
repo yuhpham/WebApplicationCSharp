@@ -25,7 +25,6 @@ namespace WebApplicationCSharp.test
             {
                 PageIndex = 1,
                 PageSize = 10,
-
             };
             // Output
             AppVersionGetListResponse response = await _ApplicationService.GetAppVersionList(request);
@@ -44,7 +43,6 @@ namespace WebApplicationCSharp.test
             {
                 PageIndex = 1,
                 PageSize = 10,
-
             };
             // Output
             AppVersionGetListResponse response = await _ApplicationService.GetAppVersionList(request);

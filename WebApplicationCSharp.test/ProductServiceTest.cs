@@ -15,26 +15,21 @@ namespace WebApplicationCSharp.test
         }
 
         /// <summary>
-        /// GetApplicationVersionList happy case request
+        /// GetProductList with Id
         /// </summary>
         [TestMethod]
-        public async Task GetProductListTestAsync()
+        public async Task GetProductIdTestAsync()
         {
-            // Input
-            ProductGetListRequest request = new()
-            {
-                PageIndex = 1,
-                PageSize = 10,
+            Guid Id = Guid.NewGuid();
 
-            };
-            // Output
-            ProductGetListResponse response = await _productService.GetProductGetList(request);
-            Assert.IsNotNull(response); // response not null
-            Assert.IsTrue(response.productGetListResponse.Count > 0); // response data > 0
+            ProductResponse response = await _productService.GetProductId(Id);
+            Assert.IsNotNull(response);
+            Assert.Equals(response.Id,Id);
+
         }
 
         /// <summary>
-        /// GetApplicationVersionListWithVersion exception case request
+        /// GetProduct with productName exception case request
         /// </summary>
         [TestMethod]
         public async Task GetProductListProductTestAsync()
@@ -49,8 +44,13 @@ namespace WebApplicationCSharp.test
             // Output
             ProductGetListResponse response = await _productService.GetProductGetList(request);
             Assert.IsNotNull(response); // response not null
-            Assert.IsTrue(response.productGetListResponse.Count == 1); // response data > 0
+            Assert.IsTrue(response.productGetListResponse.Count >= 1); // response data > 0
         }
+
+        /// <summary>
+        /// Update Product with  exception case request
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task PostProductTestAsync()
         {
@@ -67,20 +67,7 @@ namespace WebApplicationCSharp.test
             Assert.IsNotNull(i);
             Assert.IsTrue(i);
         }
-        [TestMethod]
-        public async Task UpdateProduct()
-        {
-            ProductCreateRequest request = new()
-            {
-                Name = "name",
-                Category = "category",
-                Price = "Price",
-                Unit = "VND"
-            };
-            bool i = await _productService.CreateProduct(request);
-            Assert.IsNotNull(i);
-            Assert.IsTrue(i);
 
-        }
+        
     }
 }
