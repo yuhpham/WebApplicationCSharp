@@ -58,9 +58,7 @@ namespace WebApplicationCSharp.Service.ProductService
             {
                 /// serch follow request name , price , category
                 IQueryable<Product> query = context.Products
-                                             .Where(a => a.Name.Contains(request.Name)
-                                                      && a.Price.Contains(request.Price)
-                                                      && a.Category.Contains(request.Category));
+                                             .Where(a => a.Name.Contains(request.Name));
 
                 response.productGetListResponse = await query
                       .Skip(request.PageSize * (request.PageIndex - 1))
@@ -132,6 +130,25 @@ namespace WebApplicationCSharp.Service.ProductService
                 }
             }
             return await GetProductId(request.Id);
+        }
+
+        public async Task<bool> DeleteProduct(Guid Id)
+        {
+            int i = new();
+            using (ApplicatitonContext context = new())
+            {
+                Product? product = context.Products.Find(Id);
+
+                if (product!=null)
+                {
+                  context.Products.Remove(product);
+                    i = await context.SaveChangesAsync();
+                    return i> 0;
+                }
+
+            }
+            return i > 0;
+           
         }
     }
 }

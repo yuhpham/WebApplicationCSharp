@@ -28,7 +28,7 @@ namespace WebApplicationCSharp.test
             {
                 PageIndex = 1,
                 PageSize = 10,
-                
+
             };
             // Output
             ProductGetListResponse response = await _productService.GetProductGetList(request);
@@ -47,7 +47,9 @@ namespace WebApplicationCSharp.test
             {
                 PageIndex = 1,
                 PageSize = 10,
-                Name = "Product 45039"
+                Name = "Product 45039",
+
+
             };
             // Output
             ProductGetListResponse response = await _productService.GetProductGetList(request);
@@ -70,6 +72,20 @@ namespace WebApplicationCSharp.test
             Assert.IsNotNull(i);
             Assert.IsTrue(i);
         }
+        [TestMethod]
+        public async Task UpdateProduct()
+        {
+            ProductCreateRequest request = new()
+            {
+                Name = "name",
+                Category = "category",
+                Price = "Price",
+                Unit = "VND"
+            };
+            bool i = await _productService.CreateProduct(request);
+            Assert.IsNotNull(i);
+            Assert.IsTrue(i);
 
+        }
     }
 }

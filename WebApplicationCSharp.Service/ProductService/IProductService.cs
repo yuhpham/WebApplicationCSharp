@@ -9,6 +9,7 @@ namespace WebApplicationCSharp.Service.ProductService
         Task<ProductResponse> GetProductId(Guid Id);
         Task<Boolean> CreateProduct(ProductCreateRequest request);
         Task<ProductResponse> UpdateProduct(ProductUpdateRequest request);
+        Task<Boolean> DeleteProduct(Guid Id);
 
 
 
