@@ -17,11 +17,14 @@ namespace WebApplicationCSharp.Controllers
             _service = new UserService();
             _loggingService = new LoggingService();
         }
+        /// <summary>
+        /// Get UserId
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns> User  </returns>
 
         [Route("get-user-id")]
-
         [HttpGet]
-
         public async Task<IActionResult> GetUserId([FromQuery] Guid Id)
         {
             try
@@ -31,15 +34,18 @@ namespace WebApplicationCSharp.Controllers
             }
             catch (Exception ex)
             {
+                // send to logging service
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
             }
         }
-
+        /// <summary>
+        /// Get List User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>List User</returns>
         [Route("get-user")]
-
         [HttpGet]
-
         public async Task<IActionResult> GetListUser([FromQuery] UserRequest request)
         {
             try
@@ -49,33 +55,38 @@ namespace WebApplicationCSharp.Controllers
             }
             catch (Exception ex)
             {
+                // send to logging service
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
             }
         }
-
+        /// <summary>
+        /// Create new User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>new User if True</returns>
         [Route("add-user")]
-
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromQuery] UserCreateRequest request)
         {
             try
             {
                 bool response = await _service.CreateUser(request);
-
                 return new JsonResult(response);
             }
             catch (Exception ex)
             {
+                // send to logging service
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
             }
-
         }
-
-
+        /// <summary>
+        /// Update User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Updated User if True</returns>
         [Route("update-User")]
-
         [HttpPut()]
         public async Task<ActionResult> PutProduct([FromQuery] UserUpdateRequest request)
         {
@@ -83,15 +94,13 @@ namespace WebApplicationCSharp.Controllers
             {
                 UserResponse response = await _service.UpdateUser(request);
                 return new JsonResult(response);
-
-
             }
             catch (Exception ex)
             {
+                // send to logging service
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
             }
         }
-
     }
 }

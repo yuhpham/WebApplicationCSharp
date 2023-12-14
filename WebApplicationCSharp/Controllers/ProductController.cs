@@ -45,7 +45,7 @@ namespace WebApplicationCSharp.Controllers
         [Route("get-product")]
 
         [HttpGet()]
-        public async Task<IActionResult> GetProducts([FromQuery] ProductGetListRequest request)
+        public async Task<IActionResult> GetListProduct([FromQuery] ProductGetListRequest request)
         {
             try
             {

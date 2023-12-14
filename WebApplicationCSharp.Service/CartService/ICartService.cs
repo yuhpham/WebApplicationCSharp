@@ -5,7 +5,7 @@ namespace WebApplicationCSharp.Service.CartService
 {
     public interface ICartService
     {
-        Task<CartResponse> AddToCart(CartRequest request);
+        Task<ListCartResponse> AddToCart(CartRequest request);
 
         Task<ListCartResponse> GetCart(Guid cartId);
 

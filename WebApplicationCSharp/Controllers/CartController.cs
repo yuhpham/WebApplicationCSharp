@@ -26,7 +26,7 @@ namespace WebApplicationCSharp.Controllers
         {
             try
             {
-                CartResponse cartResponse = await _cartService.AddToCart(request);
+                ListCartResponse cartResponse = await _cartService.AddToCart(request);
                 return new JsonResult(cartResponse);
             }
             catch (Exception ex)

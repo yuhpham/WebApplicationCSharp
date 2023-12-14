@@ -7,7 +7,12 @@ using WebApplicationCSharp.dto.Request.Cart;
 namespace WebApplicationCSharp.Service.CartService
 {
     public class CartService : ICartService
-    {
+    {   
+        /// <summary>
+        /// GetCart
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         public Task<ListCartResponse> GetCart(Guid cartId)
         {
 
@@ -50,22 +55,55 @@ namespace WebApplicationCSharp.Service.CartService
                                         CreatedAt = product.CreatedAt
                                     };
 
-
                                     listCartResponse.ListProducts.Add(productResponse);
-
                                 }
                             }
                         }
                         listCartResponse.TotalPrice = listCartResponse.ListProducts.Sum(p => double.Parse(p.Price));
-
                     }
                 }
             }
             return Task.FromResult(listCartResponse);
         }
-        public Task<CartResponse> AddToCart(CartRequest request)
+        /// <summary>
+        /// Add Product to cart
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Updated Cart </returns>
+        public async Task<ListCartResponse> AddToCart(CartRequest request)
         {
-            throw new NotImplementedException();
+            using (ApplicatitonContext context = new())
+            {
+                if (context.Products != null && context.Carts != null && context.Users != null)
+                {
+                    Cart? cart = context.Carts.Find(request.UserId);
+                    if (cart == null)
+                    {
+                        // if A user dont have any cart create new
+                        bool i = await InsertCart(request);
+                        if (i)
+                        {
+                            return await GetCart(request.UserId);
+                        }
+                    }
+                    else if (request.ProductId != Guid.Empty)
+                    {
+                        //if A user have  cart update it
+                        bool i = await UpdateCart(request);
+                        if (i)
+                        {
+                            return await GetCart(request.UserId);
+                        }
+                    }
+                    else
+                    {
+                        //if user just watch user's cart
+                        return await GetCart(request.UserId);
+                    }
+                }
+            }
+            return await GetCart(request.UserId);
+
 
         }
         public async Task<bool> InsertCart(CartRequest request)
@@ -96,7 +134,7 @@ namespace WebApplicationCSharp.Service.CartService
 
                     if (cart != null)
                     {
-                        string newProdcut = "," + request.ProductId;
+                        string newProdcut = request.ProductId.ToString();
                         cart.ListProducts = cart.ListProducts + newProdcut;
                         await context.Carts.AddAsync(cart);
                         await context.SaveChangesAsync();
