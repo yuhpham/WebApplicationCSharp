@@ -79,7 +79,7 @@ namespace WebApplicationCSharp.Service.CartService
                     Cart? cart = context.Carts.Find(request.UserId);
                     if (cart == null)
                     {
-                        // if A user dont have any cart create new
+                        // if a user don't have any cart create new
                         bool i = await InsertCart(request);
                         if (i)
                         {
@@ -118,11 +118,16 @@ namespace WebApplicationCSharp.Service.CartService
                     ListProducts = request.ProductId.ToString()
                 };
                 await context.Carts.AddAsync(cart);
-                int i = await context.SaveChangesAsync(); //save change trả về int
+                int i = await context.SaveChangesAsync(); //save change
                 return i > 0;
             }
             return false;
         }
+        /// <summary>
+        /// Update Cart
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> false</returns>
         public async Task<bool> UpdateCart(CartRequest request)
         {
 
