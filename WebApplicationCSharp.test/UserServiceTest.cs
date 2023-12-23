@@ -4,6 +4,7 @@ using WebApplicationCSharp.Service.UserService;
 
 namespace WebApplicationCSharp.test
 {
+    [TestClass]
     public class UserServiceTest
     {
         private readonly IUserService _userService;
