@@ -11,7 +11,7 @@ namespace WebApplicationCSharp.test
         {
             _userService = new UserService();
         }
-        
+
         [TestMethod]
         public async Task GetListUser()
         {
@@ -30,6 +30,6 @@ namespace WebApplicationCSharp.test
 
 
 
-    } 
+    }
 
 }

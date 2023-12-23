@@ -12,7 +12,7 @@ namespace WebApplicationCSharp.test
         public ProductServiceTest()
         {
             _productService = new ProductService();
-        }        
+        }
 
         /// <summary>
         /// GetProduct with productName exception case request
@@ -53,6 +53,6 @@ namespace WebApplicationCSharp.test
             Assert.IsNotNull(i);
             Assert.IsTrue(i);
         }
-        
+
     }
 }
